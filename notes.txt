@@ -1,0 +1,220 @@
+Mon: 12/12/2016
+
+downloaded webstorm:
+dana@optiPlex-780-1-ubuntu:~/projects/iccr/iccr$ mkdir webstorm
+dana@optiPlex-780-1-ubuntu:~/projects/iccr/iccr$ cd webstorm/
+dana@optiPlex-780-1-ubuntu:~/projects/iccr/iccr/webstorm$ mv ~/Downloads/WebStorm-2016.3.1.tar.gz .
+
+
+SenchaCmd is:
+~/senchacmd/
+
+extjs 6.2 is:
+ls ~/extjs/ext-6.2.0/
+
+~/projects/extjs$ mkdir iccw
+~/projects/extjs$ cd iccw
+
+sencha -sdk $EXTJS_SDK generate app icc .
+
+sencha app watch
+
+navigate to http://localhost:1841
+
+
+--------------
+Mon: 12/19/2016
+
+classic:
+Filled out classic main layout
+
+modern:
+
+--------------
+Tue: 12/20/2016
+
+Do login in login controller
+- fires getIotaStatus event
+- listens for responses
+
+not working:
+x Added app/util/Util.js
+x Added app/util/Constant.js
+
+global app controller:
+Added app/controller/Global.js
+- listens for events
+- fires responses
+
+
+sencha app build  production
+
+ls build/production/icc/
+archive  cache.appcache  classic  classic.json  classic.jsonp  index.html  microloader.jsp  modern  modern.json  modern.jsonp  resources
+
+du -sh build/production/icc
+9.8M	build/production/icc
+
+how to package into iccr:
+
+
+~/projects/extjs/iccw$ ls build/production/icc
+archive  cache.appcache  classic  classic.json  classic.jsonp  index.html  microloader.jsp  modern  modern.json  modern.jsonp  resources
+
+dirs:
+archive
+classic
+modern
+resources
+
+release it:
+~/projects/extjs/iccw$ sencha app build  production
+
+~/projects/extjs/iccw$ cp -r build/production/icc /opt/iccr/lib
+
+in iccr/deploy-iccr.bash
+
+----------
+Fri: 12/23/2016
+
+Make C main layout be responsive
+
+
+
+Global:
+nbrStore
+- nbrModel
+
+C:
+Neighbor table:
+d grid
+- grid editable requiredd
+
+M:
+Layout
+Use FontAwesome on tabs
+Neighbor table:
+grid
+config tab
+
+--------
+Sat: 12/24/2016
+
+Put key in local storage, first check local storage, if there, go direct to main
+
+Fire show hide events for all app view states to facilitate M panel views/hides
+
+Hook up all button and label text to data bindings from view model:
+Nbr
+SvrAction
+
+M: connected and milestone status bar at top of each panel
+
+M: console log panel and grid
+C: console log panel
+
+d layout is broken: nbr bottom button bar duplicates, console log grid duplicates
+
+--------------
+Sun: 12/25/2016
+
+Fixed layout by making main a border layout
+
+Put Interior of main in border
+
+Fixed vert expansion of nbr, svraction, and log panel
+
+Fixed nbr panel bottom button bar expansion
+
+Fixed nbr panel grid by making nbr view just the grid and the bottom btn bar into another xtype
+
+Nbr model
+Nbr store
+
+On login attempt: getLangChoices
+
+C On nbr panel launch => getNeighborProperties
+
+C Login ctlr listen for all events
+
+checked in
+
+- M Login ctlr listen for all events
+
+todo:
+Log model
+Log store
+C Log grid
+M Log grid
+C Login display events
+M Login ctlr listen for all events
+M Login display events
+
+C hook up nbrbtn panel events to add, remove, save nbrs
+
+C Svr Action: iccr Properties
+M Svr Action: iccr Properties
+
+C Svr Action: iota log window
+M Svr Action: iota log window
+
+Sequence:
+on connectsucces => show lang choice => getLangChoiceProps 
+
+
+C Fix black background on console log
+?- log line store
+?- log line model
+
+C: on icc settings click handler
+
+Put menu bar at top with title centered
+Put help and about
+
+Localization:
+First connect be get supported languages, or put that on url (/icc/{lang})
+Second load be lang localization strings
+iccr:
+- new iccw prop file
+- new api for supported languages
+- new api for localization kv pairs
+global localization  model is key => value
+globl localization store
+
+Add 20x20 favicon
+
+Login -> getNeighborConfig -> getIotaStatus
+
+Make the classic login button be default
+
+Add iccw lang localization properties files to iccr and deliver lang text from iccr to iccw
+
+Have a guided tour of classic features using that tour lib from esci
+
+x Make login just have key icon, no text to clue
+
+
+git init
+ 2032  git status
+ 2033  ls classic
+ 2034  ls classic/src/
+ 2035  ls classic/src/view/
+ 2036  git add app.js app.json app bootstrap.css bootstrap.js build.xml classic.json classic.jsonp classic index.html modern.json modern.jsonp modern resources/ sass/ workspace.json 
+ 2037  git commit -m "initial commit"
+ 2038  git remote add github https://github.com/strongwares/iccw.git
+ 2039  git remove -v
+ 2040  git remote -v
+ 2041  git push -u origin master
+ 2042  git push github master
+ 2043  git pull
+ 2044  git push -f origin master
+ 2045  git pull
+ 2046  git pull github https://github.com/strongwares/iccw.git
+ 2047  git pull https://github.com/strongwares/iccw.git
+ 2048  git push github master
+ 2049  git pull
+ 2050  git push -u origin master
+ 2051  git push -u github master
+ 2052  git pull
+
+

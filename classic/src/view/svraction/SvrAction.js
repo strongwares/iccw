@@ -2,11 +2,10 @@ Ext.define('icc.view.svraction.SvrAction', {
     extend: 'Ext.panel.Panel',
     xtype: 'svraction.svraction',
 
-    requires: [
-        'icc.view.svraction.SvrAction'
-    ],
-
     controller: 'svraction',
+    viewModel: {
+        type: 'svractionmodel'
+    },
 
     layout: {
         type: 'vbox',
@@ -19,14 +18,20 @@ Ext.define('icc.view.svraction.SvrAction', {
             xtype: 'button',
             margin: 2,
             width: 120,
-            text: 'Settings...',
+            //text: 'Settings...',
+            bind: {
+                text: '{buttonSettings}'
+            },
             listeners: {
-                click: 'onSettingsClick'
+                click: 'onSettings'
             }
         },
         {
             xtype: 'button',
-            text: 'Install IOTA',
+            //text: 'Install IOTA',
+            bind: {
+                text: '{buttonInstallIota}'
+            },
             margin: 2,
             width: 120,
             listeners: {
@@ -35,7 +40,10 @@ Ext.define('icc.view.svraction.SvrAction', {
         },
         {
             xtype: 'button',
-            text: 'Start IOTA',
+            //text: 'Start IOTA',
+            bind: {
+                text: '{buttonStartIota}'
+            },
             width: 120,
             margin: 2,
             listeners: {
@@ -44,7 +52,10 @@ Ext.define('icc.view.svraction.SvrAction', {
         },
         {
             xtype: 'button',
-            text: 'Stop IOTA',
+            //text: 'Stop IOTA',
+            bind: {
+                text: '{buttonStopIota}'
+            },
             width: 120,
             margin: 2,
             listeners: {
@@ -53,7 +64,10 @@ Ext.define('icc.view.svraction.SvrAction', {
         },
         {
             xtype: 'button',
-            text: 'Delete DB',
+            //text: 'Delete DB',
+            bind: {
+                text: '{buttonDeleteDb}'
+            },
             width: 120,
             margin: 2,
             listeners: {
@@ -62,7 +76,10 @@ Ext.define('icc.view.svraction.SvrAction', {
         },
         {
             xtype: 'button',
-            text: 'Uninstall IOTA',
+            //text: 'Uninstall IOTA',
+            bind: {
+                text: '{buttonUninstallIota}'
+            },
             width: 120,
             margin: 2,
             listeners: {
@@ -71,7 +88,10 @@ Ext.define('icc.view.svraction.SvrAction', {
         },
         {
             xtype: 'button',
-            text: 'ICCR Event Log...',
+            //text: 'ICCR Event Log...',
+            bind: {
+                text: '{buttonIccrEventLog}'
+            },
             width: 120,
             margin: 2,
             listeners: {
@@ -80,7 +100,10 @@ Ext.define('icc.view.svraction.SvrAction', {
         },
         {
             xtype: 'button',
-            text: 'IOTA Log...',
+            //text: 'IOTA Log...',
+            bind: {
+                text: '{buttonIotaLog}'
+            },
             width: 120,
             margin: 2,
             listeners: {

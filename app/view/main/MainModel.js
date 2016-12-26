@@ -5,7 +5,7 @@ Ext.define('icc.view.main.MainModel', {
 
     data: {
         name: 'IOTA Control Center'
-   }
+    }
 
     //TODO - add data, formulas and/or methods to support your view
 });

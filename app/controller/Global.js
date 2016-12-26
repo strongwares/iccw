@@ -2,11 +2,24 @@ Ext.define('icc.controller.Global', {
     extend: 'Ext.app.Controller',
     alias: 'controller.global',
 
+    statics: {
+        API_KEY_PROP: 'apiKey',
+        fireLoginSuccess: function() {
+
+        },
+        fireLoginFail: function(msg) {
+
+        }
+    },
+
     listen: {
         controller: {
             '*': {
+                connectAttempt: 'onConnectAttempt',
                 getIotaStatus: 'onGetIotaStatus',
-                connect: 'onConnect'
+                getNeighborProperties: 'onGetNbrProperties',
+                getIccrProperties: 'onGetIccrProperties',
+                getIccrProperties: 'onGetIccrProperties'
             }
         }
     },
@@ -16,6 +29,16 @@ Ext.define('icc.controller.Global', {
         console.log("controller.global init");
     },
 
+    storeApiKey: function(apiKey) {
+        this.apiKey = apiKey;
+        localStorage.setItem(icc.controller.Global.API_KEY_PROP, apiKey);
+    },
+
+    clearApiKey: function() {
+        delete this.apiKey;
+        localStorage.removeItem(icc.controller.Global.API_KEY_PROP);
+    },
+
     genHeaders: function(op, method) {
         return header = {
             'ICCR-API-KEY': this.apiKey,
@@ -23,33 +46,35 @@ Ext.define('icc.controller.Global', {
         };
     },
 
-    onConnect: function(apiKey) {
+    onConnectAttempt: function(apiKey) {
         var me = this;
         me.apiKey = apiKey;
-        console.log(me.alias + " onConnect: " + apiKey);
+        console.log(me.alias + " onConnectAttempt: " + apiKey);
 
         if(true) {
-            this.fireEvent('connectSuccess', 'happy');
+            me.storeApiKey(apiKey);
+            this.fireEvent('connectSuccess',  'happy');
             return;
         }
 
         Ext.Ajax.request({
-            url:  "../iccr/rs/iota/cmd/status",
-            method: 'POST',
-            headers: me.genHeaders('getIotaStatus', 'POST'),
+            url:  "../iccr/rs/icc/languages",
+            method: 'GET',
+            headers: me.genHeaders('getLanguageChoices', 'GET'),
             success: function(response) {
-                console.log("connect getIotaStatus success: ");
+                console.log("connect getLanguageChoices success: ");
                 console.dir(response);
                 try {
                     this.fireEvent('connectSuccess', JSON.parse(response.responseText));
                 }
                 catch(exc) {
-                    console.log(this.alias + " connect success, exception firing event: " + exc);
+                    console.log(this.alias + " connect getLanguageChoices success, exception firing event: " + exc);
                 }
             },
             failure: function(response) {
-                console.log("connect getIotaStatus failure: ");
+                console.log("connect getLanguageChoices failure: ");
                 console.dir(response);
+                delete this.apiKey;
                 try {
                     this.fireEvent('connectFail');
                 }
@@ -76,7 +101,7 @@ Ext.define('icc.controller.Global', {
                     this.fireEvent('getIotaStatusSuccess', JSON.parse(response.responseText));
                 }
                 catch(exc) {
-
+                    console.log(this.alias + " getIotaStatus success exception firing event: " + exc);
                 }
             },
             failure: function(response) {
@@ -86,7 +111,71 @@ Ext.define('icc.controller.Global', {
                     this.fireEvent('getIotaStatusFail');
                 }
                 catch(exc) {
-                    console.log(this.alias + " exception firing event: " + exc);
+                    console.log(this.alias + " getIotaStatusFail exception firing event: " + exc);
+                }
+            },
+            scope: me
+        });
+    },
+
+    onGetNbrProperties: function() {
+        var me = this;
+        console.log(me.alias + " getNbrProperties");
+
+        Ext.Ajax.request({
+            url:  "../iccr/rs/app/config/iota/nbrs",
+            method: 'GET',
+            headers: me.genHeaders('getNeighborProperties', 'GET'),
+            success: function(response) {
+                console.log("getNeighborProperties success: ");
+                console.dir(response);
+                try {
+                    this.fireEvent('getNeighborPropertiesSuccess', JSON.parse(response.responseText));
+                }
+                catch(exc) {
+                    console.log(this.alias + " getNeighborProperties success exception firing event: " + exc);
+                }
+            },
+            failure: function(response) {
+                console.log("getNeighborProperties failure: ");
+                console.dir(response);
+                try {
+                    this.fireEvent('getNeighborPropertiesFail');
+                }
+                catch(exc) {
+                    console.log(this.alias + " getNeighborPropertiesFail exception firing event: " + exc);
+                }
+            },
+            scope: me
+        });
+    },
+
+    onGetIccrProperties: function() {
+        var me = this;
+        console.log(me.alias + " getIccrProperties");
+
+        Ext.Ajax.request({
+            url:  "../iccr/rs/app/config",
+            method: 'GET',
+            headers: me.genHeaders('getIccrProperties', 'GET'),
+            success: function(response) {
+                console.log("getIccrProperties success: ");
+                console.dir(response);
+                try {
+                    this.fireEvent('getIccrPropertiesSuccess', JSON.parse(response.responseText));
+                }
+                catch(exc) {
+                    console.log(this.alias + " getIccrProperties success exception firing event: " + exc);
+                }
+            },
+            failure: function(response) {
+                console.log("getIccrProperties failure: ");
+                console.dir(response);
+                try {
+                    this.fireEvent('getIccrPropertiesFail');
+                }
+                catch(exc) {
+                    console.log(this.alias + " getIccrPropertiesFail exception firing event: " + exc);
                 }
             },
             scope: me

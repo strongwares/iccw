@@ -12,87 +12,56 @@ Ext.define('icc.view.main.Main', {
         'icc.view.log.Log'
     ],
 
-    controller: 'main',
-    viewModel: 'main',
+            controller: 'main',
+            viewModel: 'main',
 
-    defaults: {
-        tab: {
-            iconAlign: 'top'
-        },
-        styleHtmlContent: true
-    },
+            defaults: {
+                tab: {
+                    iconAlign: 'top'
+                },
+                styleHtmlContent: true
+            },
+            tabBarPosition: 'bottom',
 
-    tabBarPosition: 'bottom',
-
-    items: [
-        {
-            title: 'Nbrs',
-            iconCls: 'fa-th-list',
-            layout: 'fit',
             items: [
                 {
-                    xtype: 'nbr.nbr'
-                }
-            ]
-        },
-        {
-            title: 'Action',
-            iconCls: 'fa-bolt',
-            layout: 'fit',
-            items: [
+                    title: 'Nbrs',
+                    iconCls: 'fa-th-list',
+                    layout: 'fit',
+                    items: [
+                        {
+                            xtype: 'nbr.nbr'
+                        }
+                    ]
+                },
                 {
-                    xtype: 'svraction.svraction'
-                }
-            ]
-        },
-        {
-            title: 'Console',
-            iconCls: 'fa-file',
-            layout: 'fit',
-            items: [
+                    title: 'Action',
+                    iconCls: 'fa-bolt',
+                    layout: 'fit',
+                    items: [
+                        {
+                            xtype: 'svraction.svraction'
+                        }
+                    ]
+                },
                 {
-                    xtype: 'log.log'
-                }
-            ]
-        },
-        {
-            title: 'Settings',
-            iconCls: 'fa-cog',
-            items: [
+                    title: 'Console',
+                    iconCls: 'fa-file',
+                    layout: 'fit',
+                    items: [
+                        {
+                            xtype: 'log.log'
+                        }
+                    ]
+                },
                 {
-                    xtype: 'cfg.cfg'
+                    title: 'Settings',
+                    iconCls: 'fa-cog',
+                    items: [
+                        {
+                            xtype: 'cfg.cfg'
+                        }
+                    ]
                 }
             ]
-        }
-
-        /*
-        {
-            title: 'Home',
-         iconCls: 'x-fa fa-home',
-            layout: 'fit',
-            // The following grid shares a store with the classic version's grid as well!
-            items: [{
-                xtype: 'mainlist'
-            }]
-        },{
-            title: 'Users',
-            iconCls: 'x-fa fa-user',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },{
-            title: 'Groups',
-            iconCls: 'x-fa fa-users',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },{
-            title: 'Settings',
-            iconCls: 'x-fa fa-cog',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        }
-        */
-    ]
 });

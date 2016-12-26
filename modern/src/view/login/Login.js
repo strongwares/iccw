@@ -13,15 +13,10 @@ Ext.define('icc.view.login.Login', {
     autoShow: true,
 
     items: [
-        /*
         {
-            xtype: '',
-            name: 'passwordLabel',
-            text: 'ICCR API Key:'
-        },
-        */
-        {
-            html: 'ICCR API Key:'
+            html: 'ICCR API Key:',
+            xtype: 'label'
+            //cls: 'x-fa fa fa-key'
         },
         {
             xtype: 'textfield',

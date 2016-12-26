@@ -7,7 +7,7 @@ Ext.define('icc.view.login.Login', {
     ],
 
     controller: 'login',
-    bodyPadding: 10,
+    bodyPadding: 5,
     title: 'Connect To ICCR',
     closable: false,
     autoShow: true,
@@ -22,7 +22,8 @@ Ext.define('icc.view.login.Login', {
                 reference: 'apiKeyField',
                 inputType: 'password',
                 fieldLabel: 'ICCR API Key',
-                allowBlank: false
+                allowBlank: false,
+                labelWidth: 100
             }
         ],
         buttons: [

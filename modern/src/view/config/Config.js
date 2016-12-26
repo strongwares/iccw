@@ -2,39 +2,57 @@ Ext.define('icc.view.config.Config', {
     extend: 'Ext.form.Panel',
     xtype: 'cfg.cfg',
 
+    requires: [
+        'icc.view.status.StatusBar'
+    ],
+
     controller: 'config',
-    bodyPadding: 10,
-    title: 'ICC Settings',
+    //bodyPadding: 10,
+    //title: 'ICC Settings',
     closable: false,
     autoShow: true,
 
+    defaults: {
+        //margin: 10
+    },
+
     items: [
         {
-            html: 'Neighbor RefreshTime:'
+            xtype: 'status.statusbar',
+            margin: 10
+        },
+        {
+            html: 'Nbr Refresh Time:',
+            margin: '10, 0, 2, 10'
         },
         {
             xtype: 'textfield',
             name: 'nbrRefreshTime',
             allowBlank: false,
-            reference: 'nbrRefreshField'
+            reference: 'nbrRefreshField',
+            margin: '0, 10, 0, 10'
         },
         {
-            html: 'Node Info Refresh Time:'
+            html: 'Node Info Refresh Time:',
+            margin: '10, 0, 2, 10'
         },
         {
             xtype: 'textfield',
             name: 'nodeInfoRefreshTime',
             allowBlank: false,
-            reference: 'nodeInfoRefreshField'
+            reference: 'nodeInfoRefreshField',
+            margin: '0, 10, 0, 10'
         },
         {
-            html: 'IOTA Download Link:'
+            html: 'IOTA Download Link:',
+            margin: '10, 0, 2, 10'
         },
         {
             xtype: 'textfield',
             name: 'iotaDownloadLink',
             allowBlank: false,
-            reference: 'iotaDownloadField'
+            reference: 'iotaDownloadField',
+            margin: '0, 10, 0, 10'
         },
         {
             xtype: 'checkboxfield',
@@ -42,7 +60,8 @@ Ext.define('icc.view.config.Config', {
             name: 'infoRefreshCheckbox',
             reference: 'infoRefresh',
             label: 'Refresh Nbr and Node Info:',
-            labelWidth: '100%'
+            labelWidth: '100%',
+            margin: 10
         },
         {
             xtype: 'button',

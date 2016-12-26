@@ -9,6 +9,7 @@ Ext.define('icc.view.main.Main', {
         'icc.view.main.MainController',
         'icc.view.main.MainModel',
         'icc.view.nbr.Nbr',
+        'icc.view.nbr.NbrButtonPanel',
         'icc.view.svraction.SvrAction',
         'icc.view.log.Log'
     ],
@@ -18,11 +19,15 @@ Ext.define('icc.view.main.Main', {
     plugins: 'viewport',
     //ui: 'navigation',
 
+    /*
     layout: {
         type: 'hbox',
         align: 'stretch',
         margin: 5
     },
+    */
+
+    layout: 'border',
 
     header: {
         layout: {
@@ -37,7 +42,7 @@ Ext.define('icc.view.main.Main', {
         //iconCls: 'fa-th-list'
     },
 
-
+    /*
     responsiveConfig: {
         tall: {
             headerPosition: 'top'
@@ -46,7 +51,9 @@ Ext.define('icc.view.main.Main', {
             headerPosition: 'top'
         }
     },
+    */
 
+    /*
     defaults: {
         //bodyPadding: 20,
         tabConfig: {
@@ -64,12 +71,12 @@ Ext.define('icc.view.main.Main', {
             }
         }
     },
-
+    */
 
     tbar: [
         {
             xtype: 'button',
-            margin: 5,
+            margin: 0,
             width: 120,
             text: 'ICC Settings',
             listeners: {
@@ -107,71 +114,129 @@ Ext.define('icc.view.main.Main', {
 
     items: [
         {
-            xtype: 'nbr.nbr',
-            flex: 4,
-            border: true,
-            margin: 5,
-            autoScroll: true
+            region: 'center',
+            xtype: 'container',
+            //layout: 'hbox',
+            layout: 'border',
+            items: [
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'vbox',
+                        align: 'stretch'
+                    },
+                    region: 'west',
+                    border: true,
+                    margin: 5,
+                    flex: 4,
+                    items: [
+                        {
+                            xtype: 'nbr.nbr',
+                            autoScroll: true,
+                            flex: 1,
+                            border: true,
+                            forceFit: true
+                            //margin: 5
+                            //minWidth: 400,
+                            //region: 'west'
+                        },
+                        {
+                            xtype: 'nbr.nbrbuttonpanel'
+                            //html: 'hello'
+                        }
+                    ]
+                },
+                {
+                    xtype: 'svraction.svraction',
+                    flex: 1,
+                    border: true,
+                    margin: 5,
+                    region: 'center',
+                    //maxWidth: 150,
+                    minWidth: 150
+                    //autoScroll: true
+                },
+                {
+                    xtype: 'log.log',
+                    flex: 3,
+                    border: true,
+                    margin: 5,
+                    //minWidth: 200,
+                    region: 'east'
+                    //autoScroll: true
+                }
+                /*
+                 {
+                 title: 'Settings',
+                 iconCls: 'fa-cog',
+                 flex: 2,
+                 bind: {
+                 //html: '{loremIpsum}'
+                 html: 'Settings...'
+                 }
+                 }
+                 */
+                /*
+                 {
+                 title: 'Home',
+                 iconCls: 'fa-home',
+                 // The following grid shares a store with the classic version's grid as well!
+                 items: [{
+                 xtype: 'mainlist'
+                 }]
+                 },
+                 {
+                 title: 'Users',
+                 iconCls: 'fa-user',
+                 bind: {
+                 html: '{loremIpsum}'
+                 }
+                 },
+                 {
+                 title: 'Groups',
+                 iconCls: 'fa-users',
+                 bind: {
+                 html: '{loremIpsum}'
+                 }
+                 },
+                 {
+                 title: 'Settings',
+                 iconCls: 'fa-cog',
+                 bind: {
+                 html: '{loremIpsum}'
+                 }
+                 }
+                 */
+            ]
         },
         {
-            xtype: 'svraction.svraction',
-            flex: 1,
-            border: true,
-            margin: 5,
-            autoScroll: true
-        },
-        {
-            xtype: 'log.log',
-            flex: 3,
-            border: true,
-            margin: 5,
-            autoScroll: true
+            region: 'south',
+            xtype: 'container',
+            layout: 'hbox',
+            items: [
+                {
+                    xtype: 'label',
+                    margin: 5,
+                    width: 120,
+                    text: 'Online:'
+                },
+                {
+                    xtype: 'label',
+                    margin: 5,
+                    width: 120,
+                    text: 'Milestones:'
+                },
+                {
+                    xtype: 'label',
+                    margin: 5,
+                    width: 120,
+                    text: 'Solid Milestones:'
+                }
+            ]
         }
-        /*
-        {
-            title: 'Settings',
-            iconCls: 'fa-cog',
-            flex: 2,
-            bind: {
-                //html: '{loremIpsum}'
-                html: 'Settings...'
-            }
-        }
-        */
-        /*
-        {
-            title: 'Home',
-            iconCls: 'fa-home',
-            // The following grid shares a store with the classic version's grid as well!
-            items: [{
-                xtype: 'mainlist'
-            }]
-        },
-        {
-            title: 'Users',
-            iconCls: 'fa-user',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },
-        {
-            title: 'Groups',
-            iconCls: 'fa-users',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },
-        {
-            title: 'Settings',
-            iconCls: 'fa-cog',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        }
-         */
     ],
 
-    bbar: [
+    dbbar: [
         {
             xtype: 'label',
             margin: 5,

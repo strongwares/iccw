@@ -35,7 +35,7 @@ Ext.define('icc.view.login.LoginController', {
 
         //apiKeyField.setLoading("Connecting...");
         Ext.Viewport.mask({xtype: 'loadmask', message: 'Connecting...'});
-        this.fireEvent('connect', apiKey);
+        this.fireEvent('connectAttempt', apiKey);
     },
 
     onConnectSuccess: function(response) {

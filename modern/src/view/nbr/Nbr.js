@@ -3,60 +3,85 @@ Ext.define('icc.view.nbr.Nbr', {
     xtype: 'nbr.nbr',
 
     requires: [
-        'icc.view.nbr.NbrController',
+        'icc.view.status.StatusBar',
         'Ext.grid.plugin.Editable'
     ],
 
     controller: 'nbr',
+    viewModel: {
+        type: 'nbrmodel'
+    },
 
     items: [
         {
+            xtype: 'status.statusbar',
+            margin: 5
+        },
+        {
             xtype: 'grid',
             name: 'nbrGrid',
+            margin: 1,
             store: Ext.data.StoreManager.lookup('nbrStore'),
             rowLines: true,
             columns: [
                 {
-                    text: 'A',
+                    //text: 'A',
+                    bind: {
+                        text: '{columnAt}'
+                    },
                     dataIndex: 'at',
                     sortable: true,
                     hideable: false,
                     flex: 1
                 },
                 {
-                    text: 'I',
+                    //text: 'I',
+                    bind: {
+                        text: '{columnIt}'
+                    },
                     dataIndex: 'it',
                     sortable: true,
                     hideable: false,
                     flex: 1
                 },
                 {
-                    text: 'N',
+                    //text: 'N',
+                    bind: {
+                        text: '{columnNt}'
+                    },
                     dataIndex: 'nt',
                     sortable: true,
                     hideable: false,
                     flex: 1
                 },
-                /*
                 {
-                    text: 'Active',
+                    //text: 'Active',
+                    bind: {
+                        text: '{columnActive}'
+                    },
                     xtype: 'checkcolumn',
                     headerCheckbox: true,
                     dataIndex: 'active',
                     sortable: true,
                     hideable: false,
-                    flex: 2
+                    flex: 2,
+                    hidden: true
                 },
-                */
                 {
-                    text: 'Neighbor',
+                    //text: 'Neighbor',
+                    bind: {
+                        text: '{columnNbr}'
+                    },
                     dataIndex: 'nbr',
                     sortable: true,
                     hideable: false,
                     flex: 6
                 },
                 {
-                    text: 'Descr',
+                    //text: 'Descr',
+                    bind: {
+                        text: '{columnDescr}'
+                    },
                     dataIndex: 'descr',
                     sortable: true,
                     hideable: false,
@@ -72,7 +97,10 @@ Ext.define('icc.view.nbr.Nbr', {
                     xtype: 'button',
                     //padding: '10px',
                     margin: 5,
-                    text: 'Remove',
+                    //text: 'Remove',
+                    bind: {
+                        text: '{buttonRemove}'
+                    },
                     disabled: true,
                     docked: 'left',
                     listeners: {
@@ -84,7 +112,10 @@ Ext.define('icc.view.nbr.Nbr', {
                     //padding: '10px',
                     margin: 5,
                     docked: 'right',
-                    text: 'Add',
+                    //text: 'Add',
+                    bind: {
+                        text: '{buttonAdd}'
+                    },
                     listeners: {
                         tap: 'onAddTap'
                     }
@@ -94,7 +125,10 @@ Ext.define('icc.view.nbr.Nbr', {
                     //padding: '10px',
                     margin: 5,
                     docked: 'right',
-                    text: 'Save',
+                    //text: 'Save',
+                    bind: {
+                        text: '{buttonSave}'
+                    },
                     disabled: true,
                     listeners: {
                         tap: 'onSaveTap'

@@ -2,22 +2,22 @@ Ext.define('icc.view.nbr.NbrController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.nbr',
 
-    onRemoveClick: function(button) {
-        var me = this;
-
-        console.log("onRemoveClick");
+    listen: {
+        controller: {
+            'global': {
+                connectSuccess: 'onConnectSuccess',
+                connectFail: 'onConnectFail'
+            }
+        }
     },
 
-    onAddClick: function(button) {
+    launch: function () {
         var me = this;
 
-        console.log("onAddClick");
-    },
+        console.log(me.alias + " launch");
 
-    onSaveClick: function(button) {
-        var me = this;
-
-        console.log("onSaveClick");
+        // Now get neighbors and IOTA status
+        me.fireEvent('getNeighborProperties');
     }
 
 

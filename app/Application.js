@@ -19,14 +19,43 @@ Ext.define('icc.Application', {
     ],
 
     launch: function () {
+        var me = this,
+            apiKey = localStorage.getItem(icc.controller.Global.API_KEY_PROP),
+            panel;
         console.log("app launch");
 
-        //Ext.setGlyphFontFamily('FontAwesome');
+        if(apiKey) {
+            console.log("app launch, found apiKey");
 
-        var panel = Ext.create('icc.view.login.Login');
-        try {
-            Ext.Viewport.add(panel);
+            // modern:
+            try {
+                Ext.Viewport.add(Ext.create('icc.view.main.Main'));
+            }
+            catch(exc) {
+                console.log("exception creating main view");
+                Ext.create({
+                    xtype: 'app-main'
+                });
+            }
+
+            /*
+            try {
+                me.fireEvent('connectSuccess');
+            }
+            catch(exc) {
+                console.log(" connect success, exception firing event: " + exc);
+            }
+            */
         }
-        catch(exc) {    }
+        else {
+            console.log("app launch, did not find apiKey");
+
+            panel = Ext.create('icc.view.login.Login');
+            try {
+                Ext.Viewport.add(panel);
+            }
+            catch (exc) {
+            }
+        }
     }
 });
