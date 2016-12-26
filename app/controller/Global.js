@@ -51,8 +51,8 @@ Ext.define('icc.controller.Global', {
         me.apiKey = apiKey;
         console.log(me.alias + " onConnectAttempt: " + apiKey);
 
-        if(false) {
-            me.storeApiKey(apiKey);
+        if(true) {
+            //me.storeApiKey(apiKey);
             this.fireEvent('connectSuccess',  'happy');
             return;
         }
