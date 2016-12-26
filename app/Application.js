@@ -7,12 +7,14 @@ Ext.define('icc.Application', {
         // TODO: add global / shared stores here
     ],
 
+    /*
     views: [
         'icc.view.login.Login',
         'icc.view.log.Log',
         'icc.view.nbr.Nbr',
         'icc.view.svraction.SvrAction'
     ],
+    */
 
     controllers: [
         'icc.controller.Global'
@@ -29,13 +31,17 @@ Ext.define('icc.Application', {
 
             // modern:
             try {
-                Ext.Viewport.add(Ext.create('icc.view.main.Main'));
+                var p = Ext.create('icc.view.main.Main');
+                Ext.Viewport.add(p);
             }
             catch(exc) {
                 console.log("exception creating main view");
+                console.dir(exc);
+                /*
                 Ext.create({
                     xtype: 'app-main'
                 });
+                */
             }
 
             /*

@@ -135,15 +135,27 @@ On login attempt: getLangChoices
 
 C On nbr panel launch => getNeighborProperties
 
+C Nbr ctlr listens for get nbr prop results
+
 C Login ctlr listen for all events
 
 checked in
 
-- M Login ctlr listen for all events
-
-todo:
 Log model
 Log store
+
+M Login ctlr listen for all events
+
+M Nbr ctlr listens for get nbr prop results
+C Nbr ctlr listens for get nbr prop results
+M On nbr panel launch => getNeighborProperties
+
+sencha app build  production
+
+cp -r build/production/icc /opt/iccr/lib
+
+
+todo:
 C Log grid
 M Log grid
 C Login display events
@@ -161,6 +173,7 @@ M Svr Action: iota log window
 Sequence:
 on connectsucces => show lang choice => getLangChoiceProps 
 
+Make footer an xtype and listen
 
 C Fix black background on console log
 ?- log line store

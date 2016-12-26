@@ -51,7 +51,7 @@ Ext.define('icc.controller.Global', {
         me.apiKey = apiKey;
         console.log(me.alias + " onConnectAttempt: " + apiKey);
 
-        if(true) {
+        if(false) {
             me.storeApiKey(apiKey);
             this.fireEvent('connectSuccess',  'happy');
             return;
@@ -62,6 +62,7 @@ Ext.define('icc.controller.Global', {
             method: 'GET',
             headers: me.genHeaders('getLanguageChoices', 'GET'),
             success: function(response) {
+                this.storeApiKey(apiKey);
                 console.log("connect getLanguageChoices success: ");
                 console.dir(response);
                 try {
@@ -74,7 +75,7 @@ Ext.define('icc.controller.Global', {
             failure: function(response) {
                 console.log("connect getLanguageChoices failure: ");
                 console.dir(response);
-                delete this.apiKey;
+                this.clearApiKey();
                 try {
                     this.fireEvent('connectFail');
                 }

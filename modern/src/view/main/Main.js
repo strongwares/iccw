@@ -12,56 +12,56 @@ Ext.define('icc.view.main.Main', {
         'icc.view.log.Log'
     ],
 
-            controller: 'main',
-            viewModel: 'main',
+    controller: 'main',
+    viewModel: 'main',
 
-            defaults: {
-                tab: {
-                    iconAlign: 'top'
-                },
-                styleHtmlContent: true
-            },
-            tabBarPosition: 'bottom',
+    defaults: {
+        tab: {
+            iconAlign: 'top'
+        },
+        styleHtmlContent: true
+    },
+    tabBarPosition: 'bottom',
 
+    items: [
+        {
+            title: 'Nbrs',
+            iconCls: 'fa-th-list',
+            layout: 'fit',
             items: [
                 {
-                    title: 'Nbrs',
-                    iconCls: 'fa-th-list',
-                    layout: 'fit',
-                    items: [
-                        {
-                            xtype: 'nbr.nbr'
-                        }
-                    ]
-                },
-                {
-                    title: 'Action',
-                    iconCls: 'fa-bolt',
-                    layout: 'fit',
-                    items: [
-                        {
-                            xtype: 'svraction.svraction'
-                        }
-                    ]
-                },
-                {
-                    title: 'Console',
-                    iconCls: 'fa-file',
-                    layout: 'fit',
-                    items: [
-                        {
-                            xtype: 'log.log'
-                        }
-                    ]
-                },
-                {
-                    title: 'Settings',
-                    iconCls: 'fa-cog',
-                    items: [
-                        {
-                            xtype: 'cfg.cfg'
-                        }
-                    ]
+                    xtype: 'nbr.nbr'
                 }
             ]
+        },
+        {
+            title: 'Action',
+            iconCls: 'fa-bolt',
+            layout: 'fit',
+            items: [
+                {
+                    xtype: 'svraction.svraction'
+                }
+            ]
+        },
+        {
+            title: 'Console',
+            iconCls: 'fa-file',
+            layout: 'fit',
+            items: [
+                {
+                    xtype: 'log.log'
+                }
+            ]
+        },
+        {
+            title: 'Settings',
+            iconCls: 'fa-cog',
+            items: [
+                {
+                    xtype: 'cfg.cfg'
+                }
+            ]
+        }
+    ]
 });

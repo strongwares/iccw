@@ -5,8 +5,8 @@ Ext.define('icc.view.login.LoginController', {
     listen: {
         controller: {
             'global': {
-                getNeighborPropertiesSuccess: 'onGetNbrPropertiesSuccess',
-                getNeighborPropertiesFail: 'onGetNbrPropertiesFail'
+                connectSuccess: 'onConnectSuccess',
+                connectFail: 'onConnectFail'
             }
         }
     },
@@ -14,18 +14,6 @@ Ext.define('icc.view.login.LoginController', {
     init: function(app) {
         this.app = app;
         console.log(this.alias + " init");
-    },
-
-    onGetNbrPropertiesSuccess: function(nbrs) {
-        var me = this;
-
-        console.log(me.alias + " onGetNbrPropertiesSuccess");
-    },
-
-    onGetNbrPropertiesFail: function(nbrs) {
-        var me = this;
-
-        console.log(me.alias + " onGetNbrPropertiesFail");
     },
 
     onLoginClick: function(button) {

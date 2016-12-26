@@ -14,7 +14,7 @@ Ext.define('icc.view.log.Log', {
 
     layout: {
         type: 'vbox',
-        align: 'middle'
+        align: 'middle',
         padding: 5
     },
 

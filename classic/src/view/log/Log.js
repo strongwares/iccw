@@ -11,14 +11,6 @@ Ext.define('icc.view.log.Log', {
         type: 'logmodel'
     },
 
-    /*
-    layout: {
-        type: 'vbox',
-        align: 'fit',
-        padding: 5
-    },
-    */
-
     items: [
         /*
         {

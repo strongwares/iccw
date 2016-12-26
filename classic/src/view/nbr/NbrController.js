@@ -5,20 +5,38 @@ Ext.define('icc.view.nbr.NbrController', {
     listen: {
         controller: {
             'global': {
-                connectSuccess: 'onConnectSuccess',
-                connectFail: 'onConnectFail'
+                getNeighborPropertiesSuccess: 'onGetNeighborPropertiesSuccess',
+                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail'
             }
         }
     },
 
-    launch: function () {
+    init: function (app) {
         var me = this;
 
-        console.log(me.alias + " launch");
+        if(!Ext.isEmpty(me.app)) {
+            return;
+        }
+        me.app = app;
+
+        console.log(me.alias + " init");
 
         // Now get neighbors and IOTA status
         me.fireEvent('getNeighborProperties');
-    }
+    },
 
+    onGetNeighborPropertiesSuccess: function(props) {
+        var me = this;
+
+        console.log(me.alias + " onGetNeighborPropertiesSuccess:");
+        console.dir(props);
+    },
+
+    onGetNeighborPropertiesFail: function(resp) {
+        var me = this;
+
+        console.log(me.alias + " onGetNeighborPropertiesFail:");
+        console.dir(resp);
+    }
 
 });
