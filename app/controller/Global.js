@@ -140,6 +140,10 @@ Ext.define('icc.controller.Global', {
             failure: function(response) {
                 console.log("getNeighborProperties failure: ");
                 console.dir(response);
+                if(response.status == 401) {
+                    console.log("unauth response!");
+                    this.redirToLogin();
+                }
                 try {
                     this.fireEvent('getNeighborPropertiesFail');
                 }
@@ -181,6 +185,15 @@ Ext.define('icc.controller.Global', {
             },
             scope: me
         });
+    },
+
+    redirToLogin: function() {
+        var panel = Ext.create('icc.view.login.Login');
+        try {
+            Ext.Viewport.add(panel);
+        }
+        catch (exc) {
+        }
     }
 
 });

@@ -3,7 +3,7 @@ Ext.define('icc.view.nbr.Nbr', {
     xtype: 'nbr.nbr',
 
     requires: [
-        'icc.store.Nbr',
+        'icc.store.Nbr'
         //'Ext.grid.plugin.Editable'
     ],
 

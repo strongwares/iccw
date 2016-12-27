@@ -44,10 +44,28 @@ Ext.define('icc.view.nbr.NbrController', {
     },
 
     onGetNeighborPropertiesSuccess: function(props) {
-        var me = this;
+        var me = this,
+            i,
+            nbr;
 
         console.log(me.alias + " onGetNeighborPropertiesSuccess:");
         console.dir(props);
+
+        if(Ext.isEmpty(props) || Ext.isEmpty(props.nbrs)) {
+            return;
+        }
+        for(i = 0; i < props.nbrs.length; i++) {
+            nbr = props.nbrs[i];
+            me.store.add({
+                id: nbr.key,
+                at: nbr.numAt,
+                it: nbr.numIt,
+                nt: nbr.numNt,
+                active: nbr.active,
+                nbr: nbr.uri,
+                descr: nbr.descr
+            });
+        }
     },
 
     onGetNeighborPropertiesFail: function(resp) {

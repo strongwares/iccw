@@ -29,8 +29,9 @@ Ext.define('icc.Application', {
 
     launch: function () {
         var me = this,
-            apiKey = localStorage.getItem(icc.controller.Global.API_KEY_PROP),
+            apiKey = null, // localStorage.getItem(icc.controller.Global.API_KEY_PROP),
             panel;
+        
         console.log("app launch");
 
         if(apiKey) {

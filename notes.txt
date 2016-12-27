@@ -183,6 +183,12 @@ fix adding nbr to store
 
 checked in
 
+C handle get nbr properties
+M handle get nbr properties
+
+Dropped using cached apikey in local storage, force login each time
+
+checked in
 
 
 todo:
