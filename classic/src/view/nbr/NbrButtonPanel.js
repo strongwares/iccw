@@ -5,6 +5,7 @@ Ext.define('icc.view.nbr.NbrButtonPanel', {
     xtype: 'nbr.nbrbuttonpanel',
 
     requires: [
+        'icc.store.Nbr',
         'icc.view.nbr.NbrButtonPanelController'
     ],
 
@@ -12,6 +13,7 @@ Ext.define('icc.view.nbr.NbrButtonPanel', {
     viewModel: {
         type: 'nbrbtnpanelmodel'
     },
+    //store: Ext.getStore('Nbr'),
 
     layout: {
         type: 'hbox',
@@ -30,7 +32,8 @@ Ext.define('icc.view.nbr.NbrButtonPanel', {
             docked: 'left',
             listeners: {
                 click: 'onRemoveClick'
-            }
+            },
+            reference: 'removeButton'
         },
         {
             html: '',
@@ -47,7 +50,8 @@ Ext.define('icc.view.nbr.NbrButtonPanel', {
             },
             listeners: {
                 click: 'onAddClick'
-            }
+            },
+            reference: 'addButton'
         },
         {
             xtype: 'button',
@@ -61,7 +65,8 @@ Ext.define('icc.view.nbr.NbrButtonPanel', {
             disabled: true,
             listeners: {
                 click: 'onSaveClick'
-            }
+            },
+            reference: 'saveButton'
         }
     ]
 });

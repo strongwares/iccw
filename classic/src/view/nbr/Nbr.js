@@ -3,7 +3,7 @@ Ext.define('icc.view.nbr.Nbr', {
     xtype: 'nbr.nbr',
 
     requires: [
-        'icc.view.nbr.NbrController'
+        'icc.store.Nbr',
         //'Ext.grid.plugin.Editable'
     ],
 
@@ -20,7 +20,15 @@ Ext.define('icc.view.nbr.Nbr', {
     //width: '100%',
     //height: '100%',
     //minHight: 00,
-    store: Ext.data.StoreManager.lookup('nbrStore'),
+
+    // This is the storeId
+    // store: Ext.data.StoreManager.lookup('nbrStore'),
+    // or
+    // This is the store alias (i.e. store.<alias>)
+    store: {
+        type: 'nbr'
+    },
+
     rowLines: true,
     columns: [
         {

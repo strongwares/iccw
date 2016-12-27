@@ -11,6 +11,7 @@ Ext.define('icc.view.nbr.Nbr', {
     viewModel: {
         type: 'nbrmodel'
     },
+    layout: 'vbox',
 
     items: [
         {
@@ -21,7 +22,15 @@ Ext.define('icc.view.nbr.Nbr', {
             xtype: 'grid',
             name: 'nbrGrid',
             margin: 1,
-            store: Ext.data.StoreManager.lookup('nbrStore'),
+            flex: 1,
+            //store: Ext.data.StoreManager.lookup('nbrStore'),
+            // or
+            // This is the store alias (i.e. store.<alias>)
+            store: {
+                type: 'nbr'
+            },
+            reference: 'nbrGrid',
+            scrollable: 'vertical',
             rowLines: true,
             columns: [
                 {
@@ -85,7 +94,7 @@ Ext.define('icc.view.nbr.Nbr', {
                     dataIndex: 'descr',
                     sortable: true,
                     hideable: false,
-                    flex: 4
+                    flex: 3
                 }
             ]
         },
@@ -105,7 +114,8 @@ Ext.define('icc.view.nbr.Nbr', {
                     docked: 'left',
                     listeners: {
                         tap: 'onRemoveTap'
-                    }
+                    },
+                    reference: 'removeButton'
                 },
                 {
                     xtype: 'button',
@@ -118,7 +128,8 @@ Ext.define('icc.view.nbr.Nbr', {
                     },
                     listeners: {
                         tap: 'onAddTap'
-                    }
+                    },
+                    reference: 'addButton'
                 },
                 {
                     xtype: 'button',
@@ -132,7 +143,8 @@ Ext.define('icc.view.nbr.Nbr', {
                     disabled: true,
                     listeners: {
                         tap: 'onSaveTap'
-                    }
+                    },
+                    reference: 'saveButton'
                 }
             ]
         }

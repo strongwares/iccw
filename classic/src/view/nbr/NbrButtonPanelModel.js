@@ -7,6 +7,10 @@ Ext.define('icc.view.nbr.NbrButtonPanelModel', {
         buttonRemove: 'Remove',
         buttonAdd: 'Add',
         buttonSave: 'Save'
-    }
+    },
+
+    store: [
+        'Nbr'
+    ]
 
 });

@@ -6,7 +6,7 @@ Ext.define('icc.model.Nbr', {
         { name: 'it',      type: 'int' },
         { name: 'nt',      type: 'int' },
         { name: 'active',  type: 'boolean' },
-        { name: 'ip',      type: 'string' },
+        { name: 'nbr',      type: 'string' },
         { name: 'descr',   type: 'string' }
     ]
 

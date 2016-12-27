@@ -3,11 +3,8 @@ Ext.define('icc.view.nbr.NbrButtonPanelController', {
     alias: 'controller.nbrbtnpanelctlr',
 
     requires: [
+        'icc.model.Nbr',
         'icc.store.Nbr'
-    ],
-
-    stores: [
-        'Nbr'
     ],
 
     onRemoveClick: function(button) {
@@ -18,16 +15,34 @@ Ext.define('icc.view.nbr.NbrButtonPanelController', {
 
     onAddClick: function(button) {
         var me = this,
-            store = Ext.StoreManager.lookup('nbrStore');
-            //store = me.getIccStoreNbrStore();
+            newId,
+            newNbr,
+            btn = me.lookupReference("saveButton"),
+            store = Ext.getStore('nbrStore');
 
-        var newId = (new Date()).getTime();
-        var newNbr = {
-            id: newId
+        console.log("onAddClick");
+
+        if(Ext.isEmpty(store)) {
+            console.log("failed to create nbrStore");
+            return;
+        }
+
+        newId = (new Date()).getTime();
+        newNbr = {
+            id: newId,
+            at: 0,
+            it: 0,
+            nt: 0,
+            nbr: 'udp://0.0.0.0:14266',
+            descr: 'fred'
         };
         store.add(newNbr);
 
-        console.log("onAddClick");
+        if(Ext.isEmpty(btn)) {
+            console.log("failed to acquire save button");
+            return;
+        }
+        btn.enable();
     },
 
     onSaveClick: function(button) {

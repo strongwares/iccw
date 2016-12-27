@@ -6,16 +6,29 @@ dana@optiPlex-780-1-ubuntu:~/projects/iccr/iccr$ cd webstorm/
 dana@optiPlex-780-1-ubuntu:~/projects/iccr/iccr/webstorm$ mv ~/Downloads/WebStorm-2016.3.1.tar.gz .
 
 
-SenchaCmd is:
-~/senchacmd/
 
-extjs 6.2 is:
+
+SenchaCmd:
+download from http://cdn.sencha.com/cmd/6.2.1/no-jre/SenchaCmd-6.2.1-osx-no_jre.app.zip
+~/senchacmd/
+run installer from inside of there
+
+extjs 6:
+download from: http://mailer.sencha.com/G6E0Sb10Zqx9W0zd01003kR
+unzip to ~/extjs
 ls ~/extjs/ext-6.2.0/
+
+Setup extjs on already existing 
 
 ~/projects/extjs$ mkdir iccw
 ~/projects/extjs$ cd iccw
 
-sencha -sdk $EXTJS_SDK generate app icc .
+sencha -sdk $EXTJS_SDK generate app icc
+
+or
+
+after checking out iccw on new box that has extjs sdk and sencha, to set the ext folder inside the app:
+~/projects/iccw $ sencha app upgrade ~/extjs/ext-6.2.0
 
 sencha app watch
 
@@ -153,6 +166,23 @@ M On nbr panel launch => getNeighborProperties
 sencha app build  production
 
 cp -r build/production/icc /opt/iccr/lib
+
+----------
+Mon: 12/26/2016
+
+on mac
+
+C:
+Fixed nbr store references
+test adding nbr to store
+enable save btn on add
+
+M Fixed nbr store references
+enable save btn on add
+fix adding nbr to store
+
+checked in
+
 
 
 todo:

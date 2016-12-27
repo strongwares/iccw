@@ -3,8 +3,15 @@ Ext.define('icc.Application', {
 
     name: 'icc',
 
+    requires: [
+        'icc.store.Nbr',
+        'icc.store.ConsoleLog'
+    ],
+
+    // The store class name, not the id:
     stores: [
-        // TODO: add global / shared stores here
+        'ConsoleLog',
+        'Nbr'
     ],
 
     /*

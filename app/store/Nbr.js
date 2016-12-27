@@ -2,7 +2,7 @@ Ext.define('icc.store.Nbr', {
     extend: 'Ext.data.Store',
     alias: 'store.nbr',
     storeId: 'nbrStore',
-    model: 'Nbr',
+    model: 'icc.model.Nbr',
     autoLoad: false,
     sorters: [
         {
