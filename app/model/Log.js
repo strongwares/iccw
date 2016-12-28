@@ -1,8 +1,8 @@
 Ext.define('icc.model.Log', {
     extend: 'Ext.data.Model',
     fields: [
-        { name: 'id',      type: 'string' },
-        { name: 'line',   type: 'string' }
+        { name: 'id',    type: 'int' },
+        { name: 'line',  type: 'string' }
     ]
 
 });

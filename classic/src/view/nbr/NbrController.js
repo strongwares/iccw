@@ -22,6 +22,7 @@ Ext.define('icc.view.nbr.NbrController', {
         console.log(me.alias + " init");
 
         me.app = app;
+        // This is the storeId:
         me.store = Ext.getStore('nbrStore');
         me.store.on({
             add: me.onNbrStoreRecordAdd,
@@ -49,7 +50,6 @@ Ext.define('icc.view.nbr.NbrController', {
             nbr;
 
         console.log(me.alias + " onGetNeighborPropertiesSuccess:");
-        console.dir(props);
 
         if(Ext.isEmpty(props) || Ext.isEmpty(props.nbrs)) {
             return;

@@ -77,6 +77,7 @@ Ext.define('icc.view.nbr.Nbr', {
             bind: {
                 text: '{columnActive}'
             },
+            tdCls: 'grid-cell-middle',
             xtype: 'checkcolumn',
             headerCheckbox: true,
             dataIndex: 'active',

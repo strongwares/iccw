@@ -190,13 +190,28 @@ Dropped using cached apikey in local storage, force login each time
 
 checked in
 
+------------
+Tue: 12/27/2016
 
-todo:
+on ubuntu
+
+Handle login fail
+
+
 C Log grid
 M Log grid
-C Login display events
-M Login ctlr listen for all events
-M Login display events
+C Log display events
+M Log ctlr listen for all events
+M Log display events
+
+fix M log grid cell colors
+
+todo:
+
+C edittble nbr addres
+C edittble nbr descr
+M edittble nbr addres
+M edittble nbr descr
 
 C hook up nbrbtn panel events to add, remove, save nbrs
 

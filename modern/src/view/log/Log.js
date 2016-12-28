@@ -3,6 +3,7 @@ Ext.define('icc.view.log.Log', {
     xtype: 'log.log',
 
     requires: [
+        'icc.store.ConsoleLog',
         'icc.view.status.StatusBar'
     ],
 
@@ -10,7 +11,6 @@ Ext.define('icc.view.log.Log', {
     viewModel: {
         type: 'logmodel'
     },
-    //layout: 'fit',
 
     layout: {
         type: 'vbox',
@@ -44,12 +44,24 @@ Ext.define('icc.view.log.Log', {
             width: '100%',
             height: '100%',
             scrollable: true,
-            style: 'background: black',
+            //style: 'background: black',
+            // This is the storeId
+            //store: Ext.data.StoreManager.lookup('consoleLog'),
+            // This is the store alias (i.e. store.<alias>)
+            store: {
+                type: 'consolelog'
+            },
+            viewConfig: {
+                stripeRows: false
+            },
             columns: [
                 {
                     //text: 'Line',
+                    //style: 'background-color: black; color: yellow',
+                    //baseCls: 'console-log-grid-cell',
                     dataIndex: 'line',
                     width: '100%',
+                    flex: 1,
                     sortable: false,
                     hideable: false
                 }

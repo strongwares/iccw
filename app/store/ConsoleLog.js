@@ -1,7 +1,7 @@
 Ext.define('icc.store.ConsoleLog', {
     extend: 'Ext.data.Store',
     alias: 'store.consolelog',
-    storeId: 'consoleLogStore',
+    storeId: 'consoleLog',
     model: 'icc.model.Log',
     autoLoad: false,
     sorters: [

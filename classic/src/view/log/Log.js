@@ -3,6 +3,7 @@ Ext.define('icc.view.log.Log', {
     xtype: 'log.log',
 
     requires: [
+        'icc.store.ConsoleLog',
         'icc.view.log.LogController'
     ],
 
@@ -12,7 +13,6 @@ Ext.define('icc.view.log.Log', {
     },
 
     items: [
-        /*
         {
             xtype: 'label',
             bind: {
@@ -21,28 +21,36 @@ Ext.define('icc.view.log.Log', {
             margin: '5 5 2 5',
             width: '100%'
         },
-         */
         {
+            /*
             bind: {
                 title: '{consoleLabel}'
             },
+            */
             xtype: 'grid',
             name: 'consoleLogGrid',
             reference: 'consoleLogGrid',
-            store: Ext.data.StoreManager.lookup('consoleLogStore'),
-            //margin: 5,
+            // This is the storeId
+            //store: Ext.data.StoreManager.lookup('consoleLog'),
+            // This is the store alias (i.e. store.<alias>)
+            store: {
+                type: 'consolelog'
+            },
+            viewConfig: {
+                stripeRows: false
+            },
+            margin: 5,
             border: true,
             rowLines: false,
             forceFit: true,
-            //layout: '',
-            //hideHeaders: true,
-            //flex: 1,
-            //width: '100%',
-            //height: '100%',
-            //scrollable: true,
-            //baseCls: 'console-log-grid',
+            flex: 1,
+            hideHeaders: true,
+            autoScroll: true,
+            //cls: 'console-log-grid',
+            //style: 'background-color: black',
             columns: [
                 {
+                    tdCls: 'console-log-grid-cell',
                     text: 'Line',
                     dataIndex: 'line',
                     //width: '100%',
