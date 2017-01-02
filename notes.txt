@@ -204,22 +204,52 @@ C Log display events
 M Log ctlr listen for all events
 M Log display events
 
-fix M log grid cell colors
+------------------------
+Mon: 1/2/2017
 
-todo:
-
-C edittble nbr addres
+C edittble nbr address
 C edittble nbr descr
-M edittble nbr addres
+M edittble nbr address
 M edittble nbr descr
 
-C hook up nbrbtn panel events to add, remove, save nbrs
+C handle nbr edit by committing record
+C handle nbr selections by enable/disable remove
+C fire saveNbr records event
+C handle nbr save fail
+
+
+M handle nbr edit by committing record
+M handle nbr selections by enable/disable remove
+M fire saveNbr records event
+M handle nbr save fail
+
+global:
+handle saveNbr records event
+validate records: fire error event
+G fire success event
+G fire fail event
+
+C log nbr events
+M log nbr events
+
+C hook up nbr btnpanel events to remove nbrs
+M hook up nbr panel events to remove  nbrs
+
+fixed not getting grid ref on init
+
+checked in
+
+todo:
+fix M log grid cell colors
 
 C Svr Action: iccr Properties
 M Svr Action: iccr Properties
 
 C Svr Action: iota log window
 M Svr Action: iota log window
+
+refresh nbr timer
+refresh info timer
 
 Sequence:
 on connectsucces => show lang choice => getLangChoiceProps 

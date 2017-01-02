@@ -11,7 +11,7 @@ Ext.define('icc.view.nbr.Nbr', {
     viewModel: {
         type: 'nbrmodel'
     },
-
+    id: 'nbrGrid',
     name: 'nbrGrid',
     //flex: 1,
     //minWidth: 500,
@@ -28,6 +28,15 @@ Ext.define('icc.view.nbr.Nbr', {
     store: {
         type: 'nbr'
     },
+    selModel: 'rowmodel',
+
+    plugins: [
+        {
+            ptype: 'rowediting',
+            clicksToEdit: 1
+        }
+    ],
+
 
     rowLines: true,
     columns: [
@@ -81,6 +90,7 @@ Ext.define('icc.view.nbr.Nbr', {
             xtype: 'checkcolumn',
             headerCheckbox: true,
             dataIndex: 'active',
+            editor: 'checkbox',
             sortable: true,
             hideable: true,
             flex: 2
@@ -93,6 +103,10 @@ Ext.define('icc.view.nbr.Nbr', {
                 text: '{columnNbr}'
             },
             dataIndex: 'nbr',
+            editor: {
+                xtype: 'textfield',
+                allowBlank: 'false'
+            },
             sortable: true,
             hideable: false,
             flex: 6
@@ -105,6 +119,7 @@ Ext.define('icc.view.nbr.Nbr', {
                 text: '{columnDescr}'
             },
             dataIndex: 'descr',
+            editor: 'textfield',
             sortable: true,
             hideable: true,
             flex: 4

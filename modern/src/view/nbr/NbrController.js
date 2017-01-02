@@ -11,7 +11,10 @@ Ext.define('icc.view.nbr.NbrController', {
         controller: {
             'global': {
                 getNeighborPropertiesSuccess: 'onGetNeighborPropertiesSuccess',
-                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail'
+                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail',
+                saveNbrRecordsError: 'onSaveNbrRecordsError',
+                saveNbrRecordsSuccess: 'onSaveNbrRecordsSuccess',
+                saveNbrRecordsFail: 'onSaveNbrRecordsFail'
             }
         }
     },
@@ -23,11 +26,22 @@ Ext.define('icc.view.nbr.NbrController', {
 
         me.app = app;
         me.store = Ext.getStore('nbrStore');
+        /*
         me.store.on({
             add: me.onNbrStoreRecordAdd,
             remove: me.onNbrStoreRecordRemove,
             scope: me
         });
+        */
+
+        /*
+        me.grid = me.lookupReference("nbrGrid");
+        if(Ext.isEmpty(me.grid)) {
+            console.log(me.alias + " failed to get nbr grid ref");
+        }
+        me.grid.on('edit', me.onNbrGridEdit);
+        me.grid.on('selectionchange', me.onGridSelectionChange);
+        */
 
         // Now get neighbors and IOTA status
         me.fireEvent('getNeighborProperties');
@@ -42,20 +56,50 @@ Ext.define('icc.view.nbr.NbrController', {
         //me.fireEvent('getNeighborProperties');
     },
 
-    onNbrStoreRecordAdd: function(store, rec) {
+    getGridRef: function() {
         var me = this;
-        console.log("onNbrStoreRecordAdd");
-
-
+        if(Ext.isEmpty(me.grid)) {
+            me.grid = me.lookupReference("nbrGrid");
+            if(Ext.isEmpty(me.grid)) {
+                console.log(me.alias + " failed to get nbr grid ref");
+            }
+            else {
+                me.grid.on('edit', me.onNbrGridEdit, me);
+                me.grid.on('selectionchange', me.onGridSelectionChange, me);
+            }
+        }
     },
 
-    onNbrStoreRecordRemove: function(store, rec) {
-        var me = this;
-        console.log("onNbrStoreRecordRemove");
+    onGridSelectionChange: function(grid, records) {
+        var me = this,
+            removeButton = me.lookupReference("removeButton");
+
+        console.log(me.alias + " on nbr grid selection change");
+
+        if(records && records.length) {
+            removeButton.enable();
+        }
+        else {
+            removeButton.disable();
+        }
+        me.selectedRecords = records;
+    },
+
+    onNbrGridEdit: function(editor, evt) {
+        var me = this,
+            btn = me.lookupReference("saveButton");
+        console.log(me.alias + " on nbr grid edit");
+
+        evt.record.commit();
+        btn.enable();
     },
 
     onGetNeighborPropertiesSuccess: function(props) {
         var me = this;
+
+        if(Ext.isEmpty(me.grid)) {
+            me.getGridRef();
+        }
 
         console.log(me.alias + " onGetNeighborPropertiesSuccess:");
         console.dir(props);
@@ -80,14 +124,52 @@ Ext.define('icc.view.nbr.NbrController', {
     onGetNeighborPropertiesFail: function(resp) {
         var me = this;
 
+        if(Ext.isEmpty(me.grid)) {
+            me.getGridRef();
+        }
+
         console.log(me.alias + " onGetNeighborPropertiesFail:");
         console.dir(resp);
     },
 
-    onRemoveTap: function() {
+    onSaveNbrRecordsError: function(msg) {
         var me = this;
 
+        console.log(me.alias + " onSaveNbrRecordsError:");
+        console.dir(msg);
+
+        Ext.Msg.alert("Save Neighbors Error", msg, Ext.emptyFn);
+    },
+
+    onRemoveTap: function() {
+        var me = this,
+            what,
+            removeBtn = me.lookupReference("removeButton"),
+            saveBtn = me.lookupReference("saveButton");
+
         console.log("onRemoveTap");
+
+        if(Ext.isEmpty(me.selectedRecords) || me.selectedRecords.length === 0) {
+            Ext.Msg.alert("Remove Neighbors Error", "Please select a neighbor first", Ext.emptyFn);
+        }
+        else {
+            what = me.selectedRecords.length == 1 ? "that neighbor" : "those neighbors";
+            Ext.Msg.confirm("Remove Neighbor?", "Are you sure you want to remove " + what + "?",
+                function(btn) {
+                    if(!Ext.isEmpty(btn) && btn == 'yes') {
+                        console.log("removing neighbors...");
+                        this.store.remove(this.selectedRecords);
+                        this.selectedRecords = undefined;
+                        saveBtn.enable();
+                        removeBtn.disable();
+                    }
+                    else {
+                        console.log("not removing neighbors");
+                    }
+                },
+                me
+            );
+        }
     },
 
     onAddTap: function() {
@@ -109,9 +191,11 @@ Ext.define('icc.view.nbr.NbrController', {
             it: 0,
             nt: 0,
             nbr: 'udp://0.0.0.0:14266',
-            descr: 'fred'
+            descr: ''
         };
-        me.store.add(newNbr);
+        me.store.insert(0, newNbr);
+
+        //me.grid.plugins[0].startEdit(0, 3);
 
         btn = me.lookupReference("saveButton");
         if(Ext.isEmpty(btn)) {
@@ -125,6 +209,22 @@ Ext.define('icc.view.nbr.NbrController', {
         var me = this;
 
         console.log("onSaveTap");
+
+        me.fireEvent('saveNbrRecords', me.store.getRange());
+    },
+
+    onSaveNbrRecordsSuccess: function() {
+        var me = this;
+        console.log(me.alias + " on save nbr records success");
+
+    },
+
+    onSaveNbrRecordsFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on save nbr records fail");
+
+        Ext.Msg.alert("Save Neighbors Failure", msg, Ext.emptyFn);
+
     }
 
 });

@@ -18,6 +18,7 @@ Ext.define('icc.controller.Global', {
                 connectAttempt: 'onConnectAttempt',
                 getIotaStatus: 'onGetIotaStatus',
                 getNeighborProperties: 'onGetNbrProperties',
+                saveNbrRecords: 'onSaveNbrRecords',
                 getIccrProperties: 'onGetIccrProperties',
                 getIccrProperties: 'onGetIccrProperties'
             }
@@ -181,6 +182,76 @@ Ext.define('icc.controller.Global', {
                 }
                 catch(exc) {
                     console.log(this.alias + " getIccrPropertiesFail exception firing event: " + exc);
+                }
+            },
+            scope: me
+        });
+    },
+
+    onSaveNbrRecords: function(records) {
+        var me = this,
+            payload = { nbrs: [] },
+            i, nbr, rec, msg;
+        console.log(me.alias + " on save nbr records");
+
+        if(!records) { //} || records.length === 0) {
+            me.fireEvent("saveNbrRecordsError", "No neighbor records were found");
+            return;
+        }
+
+        for(i = 0; i < records.length; i++) {
+            rec = records[i];
+            console.log("nbr: ");
+            console.dir(rec);
+            nbr = rec.get('nbr');
+            if(Ext.isEmpty(nbr)) {
+                msg = "Unable to save empty neighbor address";
+            }
+            payload.nbrs.push({
+                active: rec.get('active'),
+                descr: rec.get('descr'),
+                uri: nbr,
+                key: rec.get('id'),
+                numAt: 0,
+                numIt: 0,
+                numNt: 0
+            })
+        }
+        if(!Ext.isEmpty(msg)) {
+            me.fireEvent("saveNbrRecordsError", "No neighbor records were found");
+            return;
+        }
+        me.putNbrUpdate(payload);
+    },
+
+    putNbrUpdate: function(payload) {
+        var me = this;
+        console.log(me.alias + " putNbrUpdate");
+        console.dir(payload);
+
+        Ext.Ajax.request({
+            url:  "../iccr/rs/app/config/iota/nbrs",
+            method: 'PUT',
+            headers: me.genHeaders('putNbrUpdate', 'PUT'),
+            jsonData: payload,
+            success: function(response) {
+                console.log("putNbrUpdate success: ");
+                console.dir(response);
+                try {
+                    this.fireEvent('saveNbrRecordsSuccess', JSON.parse(response.responseText));
+                }
+                catch(exc) {
+                    console.log(this.alias + " putNbrUpdate success exception firing event: " + exc);
+                }
+            },
+            failure: function(response) {
+                console.log("putNbrUpdate failure: ");
+                console.dir(response);
+                try {
+                    this.fireEvent('saveNbrRecordsFail');
+                }
+                catch(exc) {
+                    console.log(this.alias + " saveNbrRecordsFail exception firing event: " + exc);
                 }
             },
             scope: me

@@ -64,10 +64,10 @@ Ext.define('icc.view.main.Main', {
                     items: [
                         {
                             xtype: 'nbr.nbr',
-                            autoScroll: true,
+                            //autoScroll: true,
                             flex: 1,
                             border: true,
-                            forceFit: true
+                            forceFit: true,
                             //margin: 5
                             //minWidth: 400,
                             //region: 'west'

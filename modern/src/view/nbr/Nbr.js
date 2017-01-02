@@ -21,6 +21,7 @@ Ext.define('icc.view.nbr.Nbr', {
         {
             xtype: 'grid',
             name: 'nbrGrid',
+            id: 'nbrGrid',
             margin: 1,
             flex: 1,
             //store: Ext.data.StoreManager.lookup('nbrStore'),
@@ -29,6 +30,10 @@ Ext.define('icc.view.nbr.Nbr', {
             store: {
                 type: 'nbr'
             },
+            selModel: 'rowmodel',
+
+            plugins: 'grideditable',
+
             reference: 'nbrGrid',
             scrollable: 'vertical',
             rowLines: true,
@@ -41,6 +46,7 @@ Ext.define('icc.view.nbr.Nbr', {
                     dataIndex: 'at',
                     sortable: true,
                     hideable: false,
+                    editable: false,
                     flex: 1
                 },
                 {
@@ -51,6 +57,7 @@ Ext.define('icc.view.nbr.Nbr', {
                     dataIndex: 'it',
                     sortable: true,
                     hideable: false,
+                    editable: false,
                     flex: 1
                 },
                 {
@@ -61,6 +68,7 @@ Ext.define('icc.view.nbr.Nbr', {
                     dataIndex: 'nt',
                     sortable: true,
                     hideable: false,
+                    editable: false,
                     flex: 1
                 },
                 {
@@ -74,13 +82,16 @@ Ext.define('icc.view.nbr.Nbr', {
                     sortable: true,
                     hideable: false,
                     flex: 2,
-                    hidden: true
+                    hidden: true,
+                    editable: true
                 },
                 {
                     //text: 'Neighbor',
                     bind: {
                         text: '{columnNbr}'
                     },
+                    editable: true,
+                    //editor: 'textfield',
                     dataIndex: 'nbr',
                     sortable: true,
                     hideable: false,
@@ -91,6 +102,8 @@ Ext.define('icc.view.nbr.Nbr', {
                     bind: {
                         text: '{columnDescr}'
                     },
+                    //editor: 'textfield',
+                    editable: true,
                     dataIndex: 'descr',
                     sortable: true,
                     hideable: false,

@@ -11,7 +11,10 @@ Ext.define('icc.view.nbr.NbrController', {
         controller: {
             'global': {
                 getNeighborPropertiesSuccess: 'onGetNeighborPropertiesSuccess',
-                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail'
+                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail',
+                saveNbrRecordsError: 'onSaveNbrRecordsError',
+                saveNbrRecordsSuccess: 'onSaveNbrRecordsSuccess',
+                saveNbrRecordsFail: 'onSaveNbrRecordsFail'
             }
         }
     },
@@ -32,6 +35,19 @@ Ext.define('icc.view.nbr.NbrController', {
 
         // Now get neighbors and IOTA status
         me.fireEvent('getNeighborProperties');
+
+        me.getGridRef();
+    },
+
+    getGridRef: function() {
+        var me = this;
+        if(Ext.isEmpty(me.grid)) {
+            me.grid = Ext.getCmp('nbrGrid');//   me.lookupReference("nbrGridRef");
+            if (Ext.isEmpty(me.grid)) {
+                console.log(me.alias + " failed to get grid ref");
+                //me.grid =
+            }
+        }
     },
 
     onNbrStoreRecordAdd: function(store, rec) {
@@ -48,6 +64,10 @@ Ext.define('icc.view.nbr.NbrController', {
         var me = this,
             i,
             nbr;
+
+        if(Ext.isEmpty(me.grid)) {
+            me.getGridRef();
+        }
 
         console.log(me.alias + " onGetNeighborPropertiesSuccess:");
 
@@ -71,6 +91,10 @@ Ext.define('icc.view.nbr.NbrController', {
     onGetNeighborPropertiesFail: function(resp) {
         var me = this;
 
+        if(Ext.isEmpty(me.grid)) {
+            me.getGridRef();
+        }
+
         console.log(me.alias + " onGetNeighborPropertiesFail:");
         console.dir(resp);
 
@@ -91,6 +115,29 @@ Ext.define('icc.view.nbr.NbrController', {
             me.store.add(newNbr)
         }
         */
+    },
+
+    onSaveNbrRecordsError: function(msg) {
+        var me = this;
+
+        console.log(me.alias + " onSaveNbrRecordsError:");
+        console.dir(msg);
+
+        Ext.Msg.alert("Save Neighbors Error", msg, Ext.emptyFn);
+    },
+
+    onSaveNbrRecordsSuccess: function() {
+        var me = this;
+        console.log(me.alias + " on save nbr records success");
+
+    },
+
+    onSaveNbrRecordsFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on save nbr records fail");
+
+        Ext.Msg.alert("Save Neighbors Failure", msg, Ext.emptyFn);
+
     }
 
 });

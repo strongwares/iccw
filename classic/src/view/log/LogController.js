@@ -11,7 +11,9 @@ Ext.define('icc.view.log.LogController', {
         controller: {
             'global': {
                 getNeighborPropertiesSuccess: 'onGetNbrPropertiesSuccess',
-                getNeighborPropertiesFail: 'onGetNbrPropertiesFail'
+                getNeighborPropertiesFail: 'onGetNbrPropertiesFail',
+                saveNbrRecordsSuccess: 'onSaveNbrRecordsSuccess',
+                saveNbrRecordsFail: 'onSaveNbrRecordsFail'
             }
         }
     },
@@ -71,6 +73,27 @@ Ext.define('icc.view.log.LogController', {
                 line: 'Failed to load IOTA neighbor properties'
             });
         }
+    },
+
+    onSaveNbrRecordsSuccess: function() {
+        var me = this;
+        console.log(me.alias + " on save nbr records success");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Saved updated IOTA neighbors'
+        });
+    },
+
+    onSaveNbrRecordsFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on save nbr records fail");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Failed to save IOTA neighbors'
+        });
+
     }
 
 });
