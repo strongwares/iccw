@@ -10,6 +10,7 @@ Ext.define('icc.view.main.Main', {
         'icc.view.main.MainModel',
         'icc.view.nbr.Nbr',
         'icc.view.nbr.NbrButtonPanel',
+        'icc.view.status.StatusBar',
         'icc.view.svraction.SvrAction',
         'icc.view.log.Log'
     ],
@@ -67,7 +68,7 @@ Ext.define('icc.view.main.Main', {
                             //autoScroll: true,
                             flex: 1,
                             border: true,
-                            forceFit: true,
+                            forceFit: true
                             //margin: 5
                             //minWidth: 400,
                             //region: 'west'
@@ -93,13 +94,15 @@ Ext.define('icc.view.main.Main', {
                     border: true,
                     margin: 5,
                     //minWidth: 200,
-                    region: 'east'
-                    //autoScroll: true
+                    region: 'east',
+                    autoScroll: true
                 }
             ]
         },
         {
             region: 'south',
+            xtype: 'status.statusbar'
+            /*
             xtype: 'container',
             layout: 'hbox',
             items: [
@@ -122,6 +125,7 @@ Ext.define('icc.view.main.Main', {
                     text: 'Solid Milestones:'
                 }
             ]
+            */
         }
     ]
 });

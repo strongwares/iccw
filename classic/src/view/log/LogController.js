@@ -13,7 +13,12 @@ Ext.define('icc.view.log.LogController', {
                 getNeighborPropertiesSuccess: 'onGetNbrPropertiesSuccess',
                 getNeighborPropertiesFail: 'onGetNbrPropertiesFail',
                 saveNbrRecordsSuccess: 'onSaveNbrRecordsSuccess',
-                saveNbrRecordsFail: 'onSaveNbrRecordsFail'
+                saveNbrRecordsFail: 'onSaveNbrRecordsFail',
+                startIotaFail: 'onStartIotaFail',
+                stopIotaFail: 'onStopIotaFail',
+                installIotaFail: 'onInstallIotaFail',
+                deleteIotaFail: 'onDeleteIotaFail',
+                deletedbIotaFail: 'onDeleteDbIotaFail'
             }
         }
     },
@@ -94,6 +99,58 @@ Ext.define('icc.view.log.LogController', {
             line: 'Failed to save IOTA neighbors'
         });
 
+    },
+
+    onStartIotaFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on start iota fail");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Failed to start IOTA'
+        });
+
+    },
+
+    onStopIotaFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on stop iota fail");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Failed to stop IOTA'
+        });
+
+    },
+
+    onInstallIotaFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on install iota fail");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Failed to install IOTA'
+        });
+    },
+
+    onDeleteIotaFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on delete iota fail");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Failed to uninstall IOTA'
+        });
+    },
+
+    onDeleteDbIotaFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on delete db iota fail");
+
+        me.store.add({
+            id: (new Date()).getTime(),
+            line: 'Failed to delete IOTA DB'
+        });
     }
 
 });

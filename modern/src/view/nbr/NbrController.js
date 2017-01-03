@@ -214,9 +214,10 @@ Ext.define('icc.view.nbr.NbrController', {
     },
 
     onSaveNbrRecordsSuccess: function() {
-        var me = this;
+        var me = this,
+            saveBtn = me.lookupReference("saveButton");
         console.log(me.alias + " on save nbr records success");
-
+        saveBtn.disable();
     },
 
     onSaveNbrRecordsFail: function(msg) {

@@ -239,22 +239,63 @@ fixed not getting grid ref on init
 
 checked in
 
+C Make footer an xtype and listen
+C Status bar xtype
+
+Disable save btn after save
+
+Actions:
+Install I
+Start I
+Stop I
+Delete DB
+Unintall I
+
+Status bar ctlr listen for start stop iota
+
+C Fixed log grid has auto scroll
+
+checked in
+
 todo:
+
+C log grid auto scroll to bottom
+M log grid auto scroll to bottom
+
+C Actions:
+ICCR Event Log
+IOTA Log
+Settings:
+- get
+- dialog
+- save
+
+
+M Actions:
+ICCR Event Log
+IOTA Log
+Settings:
+- get
+- dialog
+- save
+
+Status bar ctlr listen for other failures
+
+C active column edit event
+
+M refresh nbr timer
+M refresh info timer
+
+C refresh nbr timer
+c refresh info timer
+
+When iota nbr refresh has nbrs not found, refresh nbr config
+
 fix M log grid cell colors
-
-C Svr Action: iccr Properties
-M Svr Action: iccr Properties
-
-C Svr Action: iota log window
-M Svr Action: iota log window
-
-refresh nbr timer
-refresh info timer
 
 Sequence:
 on connectsucces => show lang choice => getLangChoiceProps 
 
-Make footer an xtype and listen
 
 C Fix black background on console log
 ?- log line store
