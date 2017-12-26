@@ -11,7 +11,9 @@ Ext.define('icc.view.nbr.NbrButtonPanelController', {
         controller: {
             'global': {
                 getNeighborPropertiesSuccess: 'onGetNeighborPropertiesSuccess',
-                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail'
+                getNeighborPropertiesFail: 'onGetNeighborPropertiesFail',
+                saveNbrRecordsSuccess: 'onSaveNbrRecordsSuccess',
+                saveNbrRecordsFail: 'onSaveNbrRecordsFail'
             }
         }
     },
@@ -164,6 +166,21 @@ Ext.define('icc.view.nbr.NbrButtonPanelController', {
         console.log("onSaveClick");
 
         me.fireEvent('saveNbrRecords', me.store.getRange());
+    },
+
+    onSaveNbrRecordsSuccess: function() {
+        var me = this,
+            saveBtn = me.lookupReference("saveButton");
+
+        console.log(me.alias + " on save nbr records success");
+        saveBtn.disable();
+    },
+
+    onSaveNbrRecordsFail: function(msg) {
+        var me = this;
+        console.log(me.alias + " on save nbr records fail");
+
+        Ext.Msg.alert("Save Neighbors Failure", msg, Ext.emptyFn);
     }
 
 

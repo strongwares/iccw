@@ -20,7 +20,12 @@ Ext.define('icc.controller.Global', {
                 getNeighborProperties: 'onGetNbrProperties',
                 saveNbrRecords: 'onSaveNbrRecords',
                 getIccrProperties: 'onGetIccrProperties',
-                getIccrProperties: 'onGetIccrProperties'
+                getIccrProperties: 'onGetIccrProperties',
+                installIotaAction: 'onInstallIotaAction',
+                deleteIotaAction: 'onDeleteIotaAction',
+                startIotaAction: 'onStartIotaAction',
+                stopIotaAction: 'onStopIotaAction',
+                deleteDbIotaAction: 'onDeleteDbIotaAction'
             }
         }
     },
@@ -82,6 +87,58 @@ Ext.define('icc.controller.Global', {
                 }
                 catch(exc) {
                     console.log(this.alias + " connect failure, exception firing event: " + exc);
+                }
+            },
+            scope: me
+        });
+    },
+
+    onInstallIotaAction: function() {
+        this.doIotaAction("install");
+    },
+
+    onDeleteIotaAction: function() {
+        this.doIotaAction("delete");
+    },
+
+    onStartIotaAction: function() {
+        this.doIotaAction("start");
+    },
+
+    onStopIotaAction: function() {
+        this.doIotaAction("stop");
+    },
+
+    onDeleteDbIotaAction: function() {
+        this.doIotaAction("deletedb");
+    },
+
+    doIotaAction: function(action) {
+        var me = this;
+        console.log(me.alias + " doIotaAction(" + action + ")");
+
+        Ext.Ajax.request({
+            url:  "../iccr/rs/iota/cmd/" + action,
+            method: 'POST',
+            headers: me.genHeaders('doIotaAction', 'POST'),
+            success: function(response) {
+                console.log("doIotaAction success: ");
+                console.dir(response);
+                try {
+                    this.fireEvent(action + 'IotaSuccess', JSON.parse(response.responseText));
+                }
+                catch(exc) {
+                    console.log(this.alias + " doIotaAction success exception firing event: " + exc);
+                }
+            },
+            failure: function(response) {
+                console.log("doIotaAction failure: ");
+                console.dir(response);
+                try {
+                    this.fireEvent(action + 'IotaFail');
+                }
+                catch(exc) {
+                    console.log(this.alias + " doIotaActionFail exception firing event: " + exc);
                 }
             },
             scope: me

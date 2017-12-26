@@ -37,6 +37,7 @@ Ext.define('icc.view.svraction.SvrAction', {
             bind: {
                 text: '{buttonInstallIota}'
             },
+            reference: 'installIotaButton',
             margin: 5,
             width: 175,
             listeners: {

@@ -12,9 +12,7 @@ Ext.define('icc.view.nbr.NbrController', {
             'global': {
                 getNeighborPropertiesSuccess: 'onGetNeighborPropertiesSuccess',
                 getNeighborPropertiesFail: 'onGetNeighborPropertiesFail',
-                saveNbrRecordsError: 'onSaveNbrRecordsError',
-                saveNbrRecordsSuccess: 'onSaveNbrRecordsSuccess',
-                saveNbrRecordsFail: 'onSaveNbrRecordsFail'
+                saveNbrRecordsError: 'onSaveNbrRecordsError'
             }
         }
     },
@@ -124,20 +122,6 @@ Ext.define('icc.view.nbr.NbrController', {
         console.dir(msg);
 
         Ext.Msg.alert("Save Neighbors Error", msg, Ext.emptyFn);
-    },
-
-    onSaveNbrRecordsSuccess: function() {
-        var me = this;
-        console.log(me.alias + " on save nbr records success");
-
-    },
-
-    onSaveNbrRecordsFail: function(msg) {
-        var me = this;
-        console.log(me.alias + " on save nbr records fail");
-
-        Ext.Msg.alert("Save Neighbors Failure", msg, Ext.emptyFn);
-
     }
 
 });

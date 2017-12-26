@@ -29,13 +29,20 @@ Ext.define('icc.view.status.StatusController', {
 
     setOnline: function(online) {
         var onlineLabel = this.lookupReference("onlineIcon");
+        if(Ext.isEmpty(onlineLabel)) {
+            console.log("failed to acquire online label");
+        }
+        //console.log(onlineLabel.getCls());
         if(online) {
-            onlineLabel.setCls("x-fa fa fa-check");
+            onlineLabel.removeCls("fa-question");
+            onlineLabel.removeCls("fa-close");
+            onlineLabel.addCls("fa-check");
         }
         else {
-            onlineLabel.setCls("x-fa fa fa-close");
+            onlineLabel.removeCls("fa-question");
+            onlineLabel.removeCls("fa-check");
+            onlineLabel.addCls("fa-close");
         }
     }
 
 });
-
